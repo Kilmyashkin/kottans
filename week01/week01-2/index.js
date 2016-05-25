@@ -50,31 +50,20 @@ const html =
 `
 
 const patternBoot = /\bcol-\w+-(\d+|)|((push|pull|offset)-\d+)|((btn|img|text|form|input|checkbox|table|dropdown|nav|label|alert|list|progress|panel|modal|visible|hidden|carousel|media)-?(\w+(-\w+)?)?)/g
-const patternJs = /(\s|^)js-*\w*/g
+const patternJs = /(\s|^)js-\w\S*/g
 
 const plugin = tree => tree
     .match({attrs: {class: true}}, function(node) {
         let str = node.attrs.class;
-
         str = str.replace(patternBoot, "");
         let replaced = str.search(patternJs) >= 0;
+
         if(replaced){
           let match = patternJs.exec(str);
-          match = match.join("")
+          match = match.join("");
           str = str.replace(patternJs, "");
           let smth = match.replace("js-", "");
           node.attrs['data-js'] = smth.trim();
-
-          // let array = str.split(' ')
-          // array.forEach(function(item, i) {
-          //
-          //   if(item[i].test(patternJs)) {
-          //     let smth = array.item[i]("js-", "");
-          //     node.attr['data-js'] = smth
-          //     array.splice(i, 1);
-          //   }
-          // })
-          // str = array.join('');
         }
 
         if (!str.replace(/\s/g, '').length) { // detect string that is empty or contain only spaces
