@@ -1,0 +1,14 @@
+{
+  "name": "promise",
+  "version": "1.0.0",
+  "description": "some, map",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependecies": {
+    "mocha": "~2.1"
+  },
+  "author": "Spock",
+  "license": "ISC"
+}
